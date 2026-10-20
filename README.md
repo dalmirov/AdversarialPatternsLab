@@ -2,9 +2,8 @@
 
 Generate patterns, apply them to a person's T-shirt and pants through a mask, and measure how a **local** Edge Impulse (`.eim`) detector responds. Everything runs on your machine.
 
-<p align="center">
-  <img src="docs/architecture.png" alt="How it works" width="900">
-</p>
+<img width="2158" height="1392" alt="Diagrama" src="https://github.com/user-attachments/assets/7faefc26-5f9c-4037-a4be-001513062bb9" />
+
 
 *Developed by Roni Bandini · October 2026 · Maker (Counter)Culture*
 
@@ -18,19 +17,10 @@ Generate patterns, apply them to a person's T-shirt and pants through a mask, an
 4. **Shows the result.** The person with the pattern and the bounding box, the pattern itself, a results table, a log and a per-pattern detection rate.
 5. **Exports the successful patterns.** A zip with the composites, the tested patches, 1200 px patches and a CSV.
 
-> **Read this first.** The published attacks that reliably defeat person detectors use patches **optimised by gradient descent against a specific model**. The patterns here are **hand-designed and not optimised**. They are hypotheses to test ("does an object-like or texture-like cue shift this detector?"), and this tool measures whether they do. A small effect is a normal result. Use it to audit models you own or are authorised to test.
-
 ## Interfaces
 
-| Interface | Command | Notes |
-|---|---|---|
-| **Vintage terminal UI** (recommended) | `python retro_app.py ...` | Green-phosphor look, full-resolution pictures with crisp bounding boxes. Local server, opens in your browser. Designed to fit a 1024×600 screen. |
-| Streamlit dashboard | `streamlit run app.py` | Charts, gallery, pattern library browser, zip downloads. |
-| Text-mode terminal | `python tui.py ...` | Pictures drawn as half-block characters, so they are coarse. |
+<img width="1024" height="485" alt="Interface" src="https://github.com/user-attachments/assets/cf084ff5-92b4-478d-b6f4-a97b093be4d5" />
 
-<p align="center">
-  <img src="docs/screenshot.png" alt="Vintage terminal interface" width="900">
-</p>
 
 ## Requirements
 
@@ -54,7 +44,7 @@ pip install -r requirements.txt
 ## Run
 
 ```bash
-python retro_app.py \
+python app.py \
   --model models/person.eim \
   --image images/person4.png \
   --mask  images/mask.png
@@ -85,14 +75,6 @@ Then open <http://127.0.0.1:8765> (it opens automatically; on WSL2 open the URL 
 | `↑` / `↓` | Browse results |
 
 Click a pattern name to toggle it, a category header to toggle the whole category, and a table row to inspect that run.
-
-### Streamlit dashboard
-
-```bash
-streamlit run app.py
-```
-
-Needs Streamlit 1.50 or newer. Upload the model, image and mask in the sidebar.
 
 ## How the evaluation works
 
@@ -149,13 +131,9 @@ images/             put the photo and mask here
 
 - Needs a **precise mask**. The tool does not segment garments; patterns land exactly where the mask is opaque.
 - Patterns are flat 2D overlays on a single photo. They are not a physical, printed or multi-view test, so results do not transfer to the real world.
-- Small samples are noisy. With 3 variants per pattern, one run is the difference between 0% and 33%. Raise `--variants` before drawing conclusions about a pattern.
 - Only the classes and output types your `.eim` provides are evaluated. Visual anomaly output is not handled.
-- Tested here without a real `.eim` model (the layout, pattern generation, compositing and export were checked). Please report issues from your first real run.
 
 ## Background reading
-
-Pointers to the literature that motivates these patterns. They are given from memory, so verify them before citing.
 
 - Brown et al., *Adversarial Patch*, 2017
 - Thys et al., *Fooling automated surveillance cameras: adversarial patches to attack person detection*, CVPRW 2019
@@ -164,10 +142,3 @@ Pointers to the literature that motivates these patterns. They are given from me
 - Hu et al., *Adversarial Texture for Fooling Person Detectors in the Physical World*, CVPR 2022
 - Geirhos et al., *ImageNet-trained CNNs are biased towards texture*, ICLR 2019
 
-## Responsible use
-
-Use this to test the robustness of detection systems you own or have permission to evaluate, and to harden them. Do not use it to evade systems you are not authorised to test.
-
-## License
-
-Add a `LICENSE` file before publishing (MIT is a common choice for tools like this).
