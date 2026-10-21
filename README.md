@@ -1,6 +1,6 @@
 # Adversarial Pattern Lab
 
-Generate patterns, apply them to a person's T-shirt and pants through a mask, and measure how a **local** Edge Impulse (`.eim`) detector responds. Everything runs on your machine.
+Generate patterns, apply them to a person's clothing through a mask, and measure how a **local** Edge Impulse (`.eim`) detector responds. Everything runs on your machine.
 
 <img width="2158" height="1392" alt="Diagrama" src="https://github.com/user-attachments/assets/7faefc26-5f9c-4037-a4be-001513062bb9" />
 
