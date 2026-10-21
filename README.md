@@ -114,7 +114,7 @@ Some patterns depend on absolute pixel frequencies, so the 1200 px version can d
 ## Limitations
 
 - Needs a **precise mask**. The tool does not segment garments; patterns land exactly where the mask is opaque.
-- Patterns are flat 2D overlays on a single photo. They are not a physical, printed or multi-view test, so results do not transfer to the real world.
+- Patterns are flat 2D overlays on a single photo. They could change in the real world due to bendings or lighting for example.
 
 ## Background reading
 
