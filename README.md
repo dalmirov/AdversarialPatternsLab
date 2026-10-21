@@ -96,7 +96,7 @@ Click a pattern name to toggle it, a category header to toggle the whole categor
 | Optimisation-inspired | spiral, saturated blobs, multi-channel gratings, bullseye |
 | Decoy | stick figures (person-like cues that may *raise* detection) |
 
-All shapes are generic and drawn procedurally. There are no logos, brands or copyrighted characters. You can also add your own textures; in the Streamlit app they are uploaded in the sidebar.
+All shapes are generic and drawn procedurally. There are no logos, brands or copyrighted characters. You can also add your own textures.
 
 ## Exported files
 
