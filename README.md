@@ -58,7 +58,7 @@ Then open <http://127.0.0.1:8765> (it opens automatically; on WSL2 open the URL 
 | `--image` | `images/person4.png` | Person photo |
 | `--mask` | `images/mask.png` | Transparent PNG garment mask |
 | `--label` | `person` | Label whose confidence is measured (empty = any) |
-| `--threshold` | `0.5` | Confidence below this counts as "not detected" |
+| `--threshold` | `0.65` | Confidence below this counts as "not detected" |
 | `--variants` | `3` | Seeds per pattern |
 | `--size` | `300` | Pattern tile size in pixels |
 | `--seed` | `0` | Base random seed |
@@ -111,27 +111,10 @@ successful.csv                       pattern, category, seed, conf, delta
 
 Some patterns depend on absolute pixel frequencies, so the 1200 px version can differ from the tested one. The `_tested` patch is always exact.
 
-## Project layout
-
-```
-retro_app.py        vintage terminal UI server
-retro.html          vintage terminal UI page
-app.py              Streamlit dashboard
-tui.py              text-mode terminal UI
-eval_core.py        compositing, evaluation loop, summaries, export
-eim_detector.py     Edge Impulse wrapper (the only Edge Impulse code)
-pattern_library.py  the 36 patterns and their metadata
-requirements.txt
-docs/               images used by this README
-models/             put your .eim here
-images/             put the photo and mask here
-```
-
 ## Limitations
 
 - Needs a **precise mask**. The tool does not segment garments; patterns land exactly where the mask is opaque.
 - Patterns are flat 2D overlays on a single photo. They are not a physical, printed or multi-view test, so results do not transfer to the real world.
-- Only the classes and output types your `.eim` provides are evaluated. Visual anomaly output is not handled.
 
 ## Background reading
 
