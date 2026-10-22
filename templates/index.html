@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#18211f"><title>Pattern Lab · Explorador textil</title>
+<style>
+:root{color-scheme:light;--ink:#18211f;--muted:#6b7470;--paper:#f3f3ed;--card:#fff;--line:#dfe3dc;--accent:#c6f36b;--soft:#ebeee6;--shadow:0 12px 38px rgba(24,33,31,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.topbar{background:var(--ink);color:white;padding:19px clamp(18px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:12px}.mark{display:grid;grid-template-columns:repeat(3,7px);gap:3px;padding:8px;border:1px solid #52605a;border-radius:10px;transform:rotate(-8deg)}.mark i{width:7px;height:7px;background:var(--accent);border-radius:2px}.mark i:nth-child(2n){opacity:.42}.mark i:nth-child(5){background:white;opacity:1}
+.brand-title{font-size:19px;letter-spacing:.13em;font-weight:850}.brand-sub{font-size:10px;color:#b6c0ba;letter-spacing:.16em;margin-top:3px}.pill{border:1px solid #52605a;color:#d9e1dc;font-size:11px;border-radius:99px;padding:8px 12px;white-space:nowrap}.pill:before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:var(--accent)}
+.intro{padding:34px clamp(18px,4vw,56px) 23px;display:flex;justify-content:space-between;gap:25px;align-items:end;max-width:1600px;margin:auto}.eyebrow{font-size:10px;letter-spacing:.16em;font-weight:850;text-transform:uppercase;color:#65725c}h1{margin:9px 0 8px;font-size:clamp(32px,4vw,52px);line-height:1.03;letter-spacing:-.045em;font-weight:780}.intro p{margin:0;max-width:720px;line-height:1.6;color:var(--muted);font-size:14px}.count{padding:12px 16px;border:1px solid #d4d9d0;border-radius:15px;background:#ffffff80;min-width:110px}.count strong{display:block;font-size:28px;letter-spacing:-.05em}.count span{font-size:11px;color:var(--muted)}
+.workspace{max-width:1600px;padding:0 clamp(18px,4vw,56px) 45px;margin:auto;display:grid;grid-template-columns:minmax(245px,305px) minmax(0,1fr);gap:20px;align-items:start}.panel,.card{border:1px solid var(--line);background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.panel{padding:21px}.heading{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.13em;margin-bottom:17px}.field{display:block;margin-bottom:16px}.field label{display:flex;justify-content:space-between;gap:7px;margin:0 0 8px;color:#4d5852;font-size:12px;font-weight:750}.field select,.field input[type=number]{width:100%;border:1px solid #d8ddd5;border-radius:10px;padding:11px 12px;background:#fbfcf9;color:var(--ink);outline:none}.field select:focus,.field input:focus{border-color:#7d9e50;box-shadow:0 0 0 3px #c6f36b47}
+.seed-row{display:grid;grid-template-columns:1fr 45px;gap:8px}.seed-row button{background:var(--soft);border:1px solid #d8ddd5;border-radius:10px;font-size:18px;font-weight:800}.hint{color:var(--muted);font-size:11px;line-height:1.5;margin:-5px 0 17px}.field input[type=range]{width:100%;accent-color:#709737}.range-meta{display:flex;justify-content:space-between;color:#7a837e;font-size:10px;margin-top:2px}
+.btn{border:1px solid var(--ink);border-radius:10px;padding:10px 12px;font-size:11px;font-weight:850;background:var(--ink);color:white;transition:transform .15s,opacity .15s}.btn:hover{transform:translateY(-1px);opacity:.92}.btn.green{background:var(--accent);color:var(--ink);border-color:var(--accent)}.btn.ghost{background:white;color:var(--ink);border-color:#d5dcd2}.btn:disabled{opacity:.5;cursor:wait}.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btnrow .btn{padding:10px 5px}.rule{border:0;border-top:1px solid var(--line);margin:20px 0}.export-label{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}.status{min-height:17px;color:var(--muted);font-size:11px;line-height:1.45;margin-top:12px}.status.error{color:#a13535;background:#fff0ed;padding:10px;border-radius:9px}
+.content{min-width:0;display:grid;gap:19px}.card-head{padding:18px 20px 14px;display:flex;justify-content:space-between;align-items:start;gap:12px}.card-title{font-weight:850;font-size:14px;letter-spacing:-.02em}.sub{color:var(--muted);margin-top:5px;font-size:11px;line-height:1.5}.tag{font-size:9px;background:var(--soft);color:#4b6042;padding:6px 9px;border-radius:7px;font-weight:850;white-space:nowrap}.preview-frame{padding:0 20px 19px}.repeat-img{width:100%;aspect-ratio:1.65;display:block;border-radius:11px;object-fit:cover;background:#e9ede5}.caption{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:10px}.caption strong{color:#364339}
+.variants-head{padding:0 20px 12px;display:flex;align-items:end;justify-content:space-between;gap:12px}.variants{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0 20px 20px}.variant{border:1px solid #e0e4dc;border-radius:11px;overflow:hidden;padding:0;background:#fafbf8;text-align:left;color:var(--ink);min-width:0}.variant:hover,.variant.active{border-color:#7d9e50;box-shadow:0 0 0 2px #c6f36b70}.variant img{width:100%;display:block;aspect-ratio:1;object-fit:cover}.vmeta{padding:8px 9px;display:flex;justify-content:space-between;gap:3px;font-size:10px}.vmeta span{color:var(--muted)}
+.garments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.garment{min-width:0}.stage{padding:0 13px 13px}.stage svg{display:block;width:min(100%,340px);margin:auto;aspect-ratio:1}.note{color:var(--muted);font-size:10px;line-height:1.5;padding:0 17px 16px}
+.details{padding:18px 20px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}.details h3{margin:0 0 7px;font-size:12px}.details p{color:var(--muted);font-size:11px;line-height:1.6;margin:0}.ref{border-left:2px solid var(--accent);padding-left:9px;margin-top:8px!important}.foot{text-align:center;font-size:10px;color:#818981;margin-top:0;line-height:1.6}
+@media(max-width:1050px){.workspace{grid-template-columns:minmax(225px,270px) minmax(0,1fr);gap:14px}.panel{padding:16px}.variants{gap:7px;padding-left:13px;padding-right:13px}.preview-frame{padding-left:13px;padding-right:13px}}
+@media(max-width:760px){.intro{align-items:start}.count{display:none}.workspace{grid-template-columns:1fr}.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.panel{order:0}.content{order:1}}
+@media(max-width:500px){.brand-sub{display:none}.pill{font-size:9px;padding:7px 8px}.intro{padding-top:25px}.workspace{padding-bottom:25px}.garments{gap:9px}.card-head{padding:15px 14px 11px}.details{padding:15px;grid-template-columns:1fr;gap:14px}.variants-head{padding-left:14px;padding-right:14px}.variants{gap:5px;padding-left:10px;padding-right:10px}.vmeta{display:block;padding:6px;font-size:9px}.vmeta span{display:block;margin-top:3px}.preview-frame{padding:0 11px 13px}.repeat-img{aspect-ratio:1.25}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand"><div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><div class="brand-title">PATTERN LAB</div><div class="brand-sub">EXPLORADOR TEXTIL · VERSIÓN INICIAL</div></div></div><div class="pill">LOCAL · SIN NUBE</div></header>
+<section class="intro"><div><div class="eyebrow">Biblioteca procedural / 01</div><h1>Explorá la superficie.</h1><p>Generá variantes desde las semillas existentes, estudiá cómo se repite cada motivo y probalo sobre maquetas textiles. Cada combinación de patrón y semilla se puede recuperar y exportar.</p></div><div class="count"><strong id="patternCount">36</strong><span>patrones disponibles</span></div></section>
+<main class="workspace">
+<aside class="panel">
+  <div class="heading">01 / Elegí tu patrón</div>
+  <div class="control-grid">
+    <div class="field"><label for="category">Familia</label><select id="category"><option>Cargando…</option></select></div>
+    <div class="field"><label for="pattern">Patrón</label><select id="pattern" disabled><option>Cargando…</option></select></div>
+  </div>
+  <hr class="rule">
+  <div class="heading">02 / Generá variantes</div>
+  <div class="field"><label for="seed">Semilla <span>reproducible</span></label><div class="seed-row"><input id="seed" type="number" min="0" max="2147483647" value="0" step="1"><button id="next" type="button" aria-label="Siguiente semilla" title="Siguiente semilla">↗</button></div></div>
+  <div class="hint">La misma semilla, patrón y tamaño base reproducen la misma muestra en el mismo entorno.</div>
+  <div class="field"><label for="tile">Tamaño del motivo <strong id="tileLabel">160 px</strong></label><input id="tile" type="range" min="60" max="320" step="10" value="160"><div class="range-meta"><span>Repetición densa</span><span>Motivo grande</span></div></div>
+  <button id="round" class="btn green" type="button" style="width:100%">Generar otra ronda ↗</button>
+  <hr class="rule"><div class="export-label">03 / Exportar diseño</div>
+  <div class="btnrow"><button id="png" class="btn" type="button">Descargar PNG</button><button id="json" class="btn ghost" type="button">Descargar JSON</button></div>
+  <div id="status" class="status" role="status" aria-live="polite">Preparando la biblioteca local…</div>
+</aside>
+<section class="content">
+  <article class="card">
+    <div class="card-head"><div><div class="card-title">Muestra repetida · <span id="selectedName"></span></div><div class="sub">Vista de repetición continua · mosaico cuadrado</div></div><div class="tag">TEXTURA 2D</div></div>
+    <div class="preview-frame"><img id="repeat" class="repeat-img" alt="Vista repetida del patrón seleccionado"><div class="caption"><span id="previewMeta">Generando vista…</span><span><strong id="seedMeta">Semilla 0</strong> · <span id="familyMeta">Geométricos</span></span></div></div>
+    <div class="variants-head"><div><div class="card-title">Variaciones cercanas</div><div class="sub">Seleccioná una muestra para fijar su semilla.</div></div><button id="nextFour" class="btn ghost" type="button">Otras 4 ↗</button></div>
+    <div id="variants" class="variants"></div>
+  </article>
+  <div class="garments">
+    <article class="card garment"><div class="card-head"><div><div class="card-title">Camiseta</div><div class="sub">Maqueta vectorial 2D</div></div><div class="tag">PREVIEW</div></div><div class="stage" id="shirt"></div><div class="note">Vista de la estampa dentro de una silueta; no simula pliegues ni volumen real.</div></article>
+    <article class="card garment"><div class="card-head"><div><div class="card-title">Buzo con capucha</div><div class="sub">Maqueta vectorial 2D</div></div><div class="tag">PREVIEW</div></div><div class="stage" id="hoodie"></div><div class="note">Útil para estudiar escala y distribución; no representa una simulación física de tela.</div></article>
+  </div>
+  <article class="card details"><div><h3 id="detailTitle">Sobre el patrón</h3><p id="rationale">Cargando la descripción…</p></div><div><h3>Ficha de variante</h3><p id="variantDetails">La ficha reproducible se puede descargar en JSON.</p><p id="reference" class="ref"></p></div></article>
+  <div class="foot">Pattern Lab · Generación local · Sin servicios externos · Sin inferencia de modelos en esta versión</div>
+</section>
+</main>
+<script>
+(function(){
+"use strict";
+var catalog=null, state={name:"blocks",seed:0,size:300,tile:160}, token=0;
+var category=document.getElementById("category"), pattern=document.getElementById("pattern"), seedInput=document.getElementById("seed"), tileInput=document.getElementById("tile"), status=document.getElementById("status");
+function txt(id,value){document.getElementById(id).textContent=value==null?"":String(value);}
+function say(message,error){status.textContent=message;status.className=error?"status error":"status";}
+function current(){for(var i=0;i<catalog.patterns.length;i++){if(catalog.patterns[i].name===state.name)return catalog.patterns[i];}return catalog.patterns[0];}
+function qs(name,seed,size,tile){return "?name="+encodeURIComponent(name)+"&seed="+encodeURIComponent(seed)+"&size="+encodeURIComponent(size)+"&tile_size="+encodeURIComponent(tile);}
+function patchUrl(name,seed,tile){return "/api/pattern.png"+qs(name,seed,state.size,tile);}
+function tileUrl(name,seed,tile){return "/api/tile.png"+qs(name,seed,state.size,tile);}
+function garmentShape(type){
+ if(type==="hoodie")return {d:"M112 47 L128 26 Q160 8 192 26 L208 47 L257 74 L236 121 L209 105 L209 277 L111 277 L111 105 L84 121 L63 74 Z",extra:'<path d="M127 28 Q160 17 193 28 L183 62 Q160 79 137 62 Z" fill="none" stroke="#29362e" stroke-width="3" opacity=".72"/><path d="M160 63 L160 276" fill="none" stroke="#29362e" stroke-width="2" opacity=".52"/><path d="M127 177 L193 177 L202 223 L118 223 Z" fill="#18211f" fill-opacity=".1" stroke="#29362e" stroke-opacity=".55" stroke-width="2"/>'};
+ return {d:"M112 42 L134 25 L186 25 L208 42 L256 70 L236 119 L209 104 L209 277 L111 277 L111 104 L84 119 L64 70 Z",extra:'<path d="M134 26 Q160 67 186 26" fill="none" stroke="#29362e" stroke-width="3" opacity=".72"/><path d="M112 105 L112 276 M208 105 L208 276" fill="none" stroke="#29362e" stroke-width="1.5" opacity=".45"/>'};
+}
+function garmentSvg(type){
+ var s=garmentShape(type), url=patchUrl(state.name,state.seed,state.tile);
+ return '<svg viewBox="0 0 320 310" role="img" aria-label="Prenda estampada" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="cloth" patternUnits="userSpaceOnUse" width="'+state.tile+'" height="'+state.tile+'"><image href="'+url+'" width="'+state.tile+'" height="'+state.tile+'"/></pattern><linearGradient id="shade" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#17221e" stop-opacity=".25"/><stop offset=".48" stop-color="#ffffff" stop-opacity=".12"/><stop offset="1" stop-color="#17221e" stop-opacity=".18"/></linearGradient></defs><ellipse cx="160" cy="286" rx="82" ry="8" fill="#1c2822" opacity=".08"/><path d="'+s.d+'" fill="url(#cloth)" stroke="#29362e" stroke-width="2.5" stroke-linejoin="round"/><path d="'+s.d+'" fill="url(#shade)" opacity=".65"/>'+s.extra+'<path d="M67 72 L84 119 M253 72 L236 119" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2"/></svg>';
+}
+function drawGarments(){document.getElementById("shirt").innerHTML=garmentSvg("shirt");document.getElementById("hoodie").innerHTML=garmentSvg("hoodie");}
+function drawVariants(){
+ var grid=document.getElementById("variants");grid.innerHTML="";
+ for(var i=0;i<4;i++){
+  (function(seedValue,index){
+   var button=document.createElement("button");button.className="variant"+(seedValue===state.seed?" active":"");button.type="button";button.setAttribute("aria-label","Elegir semilla "+seedValue);
+   var img=document.createElement("img");img.alt="Variante, semilla "+seedValue;img.loading="lazy";img.src=patchUrl(state.name,seedValue,Math.min(state.tile,220));
+   var meta=document.createElement("div");meta.className="vmeta";var label=document.createElement("strong");label.textContent="Variante "+(index+1);var s=document.createElement("span");s.textContent="S"+seedValue;meta.appendChild(label);meta.appendChild(s);button.appendChild(img);button.appendChild(meta);
+   button.addEventListener("click",function(){state.seed=seedValue;seedInput.value=String(seedValue);render();});grid.appendChild(button);
+  })(state.seed+i,i);
+ }
+}
+function render(){
+ if(!catalog)return;var myToken=++token,p=current();
+ txt("selectedName",p.label);txt("seedMeta","Semilla "+state.seed);txt("familyMeta",p.category_label);txt("tileLabel",state.tile+" px");
+ txt("previewMeta","Mosaico 720 × 720 px · motivo "+state.tile+" px");txt("detailTitle",p.label);txt("rationale",p.rationale||"Patrón procedural de la biblioteca.");
+ txt("reference",p.reference?"Referencia conceptual: "+p.reference:"Patrón procedural genérico; sin referencia asociada.");
+ txt("variantDetails","Familia: "+p.category_label+". Semilla: "+state.seed+". Base: "+state.size+" × "+state.size+" px. Motivo visible: "+state.tile+" px.");
+ document.getElementById("repeat").src=tileUrl(state.name,state.seed,state.tile);drawVariants();drawGarments();say("Generando vistas locales…");
+ var img=new Image();img.onload=function(){if(myToken===token)say("Listo · "+state.name+" · semilla "+state.seed+".");};img.onerror=function(){if(myToken===token)say("No se pudo cargar la muestra. Revisá los valores e intentá otra vez.",true);};img.src=patchUrl(state.name,state.seed,state.tile);
+}
+function sanitizeSeed(value){var n=parseInt(value,10);return (!Number.isFinite(n)||n<0||n>2147483647)?0:n;}
+function fillPatterns(category,preferred){
+ var items=catalog.patterns.filter(function(p){return !category||p.category===category;});pattern.innerHTML="";
+ items.forEach(function(p){var o=document.createElement("option");o.value=p.name;o.textContent=p.label;pattern.appendChild(o);});
+ var found=items.some(function(p){return p.name===preferred;});state.name=found?preferred:items[0].name;pattern.value=state.name;pattern.disabled=false;
+}
+function download(url){var a=document.createElement("a");a.href=url;document.body.appendChild(a);a.click();a.remove();}
+category.addEventListener("change",function(){fillPatterns(category.value,state.name);render();});
+pattern.addEventListener("change",function(){state.name=pattern.value;render();});
+seedInput.addEventListener("change",function(){state.seed=sanitizeSeed(seedInput.value);seedInput.value=String(state.seed);render();});
+tileInput.addEventListener("input",function(){state.tile=parseInt(tileInput.value,10);txt("tileLabel",state.tile+" px");});
+tileInput.addEventListener("change",render);
+function nextSeeds(count){state.seed=(state.seed+count)%2147483648;seedInput.value=String(state.seed);render();}
+document.getElementById("next").addEventListener("click",function(){nextSeeds(1);});
+document.getElementById("round").addEventListener("click",function(){nextSeeds(4);});
+document.getElementById("nextFour").addEventListener("click",function(){nextSeeds(4);});
+document.getElementById("png").addEventListener("click",function(){download("/api/export.png"+qs(state.name,state.seed,state.size,state.tile));});
+document.getElementById("json").addEventListener("click",function(){download("/api/export.json"+qs(state.name,state.seed,state.size,state.tile));});
+fetch("/api/catalog").then(function(r){if(!r.ok)throw new Error("No se pudo cargar la biblioteca.");return r.json();}).then(function(data){
+ catalog=data;txt("patternCount",catalog.count);category.innerHTML="";
+ catalog.categories.forEach(function(c){var o=document.createElement("option");o.value=c.id;o.textContent=c.label;category.appendChild(o);});
+ var first=catalog.patterns[0];category.value=first.category;fillPatterns(first.category,"blocks");render();
+}).catch(function(err){say(err.message||"No se pudo cargar la biblioteca.",true);});
+})();
+</script>
+</body></html>
